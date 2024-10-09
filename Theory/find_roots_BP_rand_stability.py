@@ -103,7 +103,7 @@ def main():
 
     mean_gamma = c - 1
     graph_type = 'RGfc'
-    fileout = "Phase_Diagram_Homophily_" + graph_type + "_c_" + str(c) + "_G_" + str(g) + ".txt"
+    fileout = "Stability_Para_Homophily_" + graph_type + "_c_" + str(c) + "_G_" + str(g) + ".txt"
     temp_list = get_temp_list(temp_f, dtemp)
 
     construct_phase_diagram(temp_list, g, mean_gamma, fileout)
