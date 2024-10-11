@@ -1,5 +1,3 @@
-using LightGraphs, LinearAlgebra 
-import Random
 include("BP_RRG_homophily_single_eq.jl")
 
 

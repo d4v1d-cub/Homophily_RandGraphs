@@ -39,8 +39,8 @@ end
 function set_messages_hom(G::Int64, p::Float64)
     messages=zeros(2^G)
     for conf in 1:2^G
-        bstr = bitstring(conf)
-        num_1 = count(x -> x == 1, bstr)
+        bstr = bitstring(conf - 1)
+        num_1 = count(x -> x == '1', bstr)
         messages[conf] = p^num_1 * (1 - p)^(G - num_1)
     end
     messages_new=deepcopy(messages)

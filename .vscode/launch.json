@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "map_states",
+            "type": "julia",
+            "request": "launch",
+            "program": "./BP/map_states.jl",
+            "stopOnEntry": false,
+            "cwd": "${workspaceFolder}/scripts/languageserver",
+            "juliaEnv": "${workspaceFolder}/scripts/environments/languageserver",
+            "args": [
+                "3",
+                "-10",
+                "3",
+                "hom",
+                "0.51"
+            ]
+        }
+    ]
+}
