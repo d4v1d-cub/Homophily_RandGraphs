@@ -3,7 +3,7 @@ import Random
 include("BP_RRG_homophily_single_eq.jl")
 
 
-function map_all_states(c, seed, string1, string_init, max_iter, delta, G, d_alpha, 
+function map_all_states(c, param, string1, string_init, max_iter, delta, G, d_alpha, 
                                temp_list, cond_init)
     fileeq = string("BP_", string1,"_allalpha_eq_c_", string(c), 
                     "_delta_", string(exponent), "_maxiter_", 
@@ -22,9 +22,11 @@ function map_all_states(c, seed, string1, string_init, max_iter, delta, G, d_alp
         spins_combs = get_spins_combs(G)
         for alpha in alphas_list
             if cond_init == "rand"
-                messages, messages_new = set_messages_rand(seed, G)
+                messages, messages_new = set_messages_rand(param, G)
             elseif cond_init == "ord"
-                messages, messages_new = set_messages_ord(seed, G, 1)
+                messages, messages_new = set_messages_ord(param, G)
+            elseif cond_init == "hom"
+                messages, messages_new = set_messages_hom(G, param)
             end
             conv = belief_propagation(temp, c, max_iter, delta, G, alpha, spins_combs, 
                                     messages, messages_new)
@@ -64,18 +66,22 @@ d_alpha = 0.005
 temp_list = [0.1, 0.2, 0.3, 0.4, 0.5]
 
 cond_init = ARGS[4]
-seed = parse(Int64, ARGS[5])                  # The seed for the initial messages in case 
-# cond_init is 'rand', or the specific initial configuration in case cond_init=ord
 
 println("cond_init=" * cond_init)
 
 if cond_init == "rand"
-    string_init = string("_rand_init_seed_", string(seed))
+    param = parse(Int64, ARGS[5])                  # The seed for the initial messages in case 
+                                                   # cond_init is 'rand'
+    string_init = string("_rand_init_seed_", string(param))
 elseif cond_init == "ord"
-    string_init = string("_ord_init_conf_", string(seed))
+    param = parse(Int64, ARGS[5])                  # or the specific initial configuration in case cond_init=ord
+    string_init = string("_ord_init_conf_", string(param))
+elseif cond_init == "hom"
+    param = parse(Float64, ARGS[5])                  # or the specific initial configuration in case cond_init=ord
+    string_init = string("_hom_init_p_", string(param))
 else
-    println("The initial condition variable 'cond_init' must be 'ord' or 'rand'")
+    println("The initial condition variable 'cond_init' must be 'ord', 'rand', or 'hom'")
     exit(1)
 end
 
-map_all_states(c, seed, string1, string_init, max_iter, delta, G, d_alpha,temp_list, cond_init)
+map_all_states(c, param, string1, string_init, max_iter, delta, G, d_alpha,temp_list, cond_init)

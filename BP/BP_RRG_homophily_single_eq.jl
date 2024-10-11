@@ -36,6 +36,18 @@ function set_messages_ord(conf::Int64, G::Int64)
 end
 
 
+function set_messages_hom(G::Int64, p::Float64)
+    messages=zeros(2^G)
+    for conf in 1:2^G
+        bstr = bitstring(conf)
+        num_1 = count(x -> x == 1, bstr)
+        messages[conf] = p^num_1 * (1 - p)^(G - num_1)
+    end
+    messages_new=deepcopy(messages)
+    return messages, messages_new
+end
+
+
 function sum_prod_rule(temp::Float64, c::Int64, G::Int64, alpha::Float64, 
                        spins_combs::Array{Array{Int8, 1}, 1}, messages::Array{Float64, 1}, 
                        messages_new::Array{Float64, 1})
