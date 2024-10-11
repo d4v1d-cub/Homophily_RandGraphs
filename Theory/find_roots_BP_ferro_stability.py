@@ -134,8 +134,8 @@ def get_temp_list(temp_f, dtemp):
 
 
 def main():
-    g = 5
-    c = 5
+    g = 4
+    c = 4
     temp_f = 2
     dtemp = 0.01
 
