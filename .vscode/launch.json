@@ -5,13 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "map_states",
             "type": "julia",
             "request": "launch",
+            "name": "map_states",
             "program": "./BP/map_states.jl",
             "stopOnEntry": false,
-            "cwd": "${workspaceFolder}/scripts/languageserver",
-            "juliaEnv": "${workspaceFolder}/scripts/environments/languageserver",
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "juliaEnv": "${command:activeJuliaEnvironment}",
             "args": [
                 "3",
                 "-10",

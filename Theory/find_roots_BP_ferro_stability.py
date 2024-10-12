@@ -38,6 +38,29 @@ def init_all_exp_2m(temp, alpha, m, gamma):
            exp_2, exp_2_2m, exp_2_2m_pos, exp_2_2m_gamma, sinh_2_2m
 
 
+def r_2m(m, exp_1, exp_1_2m, exp_1_2m_gamma, exp_2, exp_2_2m_pos, exp_2_2m_gamma):
+    return 2 * m * (1 - exp_1_2m) * exp_1 * a_2m(m, exp_1_2m_gamma) + \
+           2 * m * binom(2 * m, m) * (1 - exp_2_2m_pos) + \
+           2 * m * (1 - exp_2_2m_pos) * exp_2 * a_2m(m, exp_2_2m_gamma)
+
+
+def q_2m(m, exp_1, exp_1_2m_neg, exp_1_2m_gamma, sinh_1_2m, 
+            exp_2, exp_2_2m_pos, exp_2_2m_gamma, sinh_2_2m):
+    return 2 * sinh_1_2m * exp_1 * exp_1_2m_gamma * a_2m_der(m, exp_1_2m_gamma) + \
+           m * binom(2 * m, m) * (exp_2_2m_pos - exp_1_2m_neg) + \
+           4 * m * sinh_2_2m * exp_2 * a_2m(m, exp_2_2m_gamma) - \
+           2 * sinh_2_2m * exp_2 * exp_2_2m_gamma * a_2m_der(m, exp_2_2m_gamma)
+
+
+def func_2m(alpha, temp, m, gamma):
+    exp_1, exp_1_2m, exp_1_2m_neg, exp_1_2m_gamma, sinh_1_2m, \
+    exp_2, exp_2_2m, exp_2_2m_pos, exp_2_2m_gamma, sinh_2_2m = init_all_exp_2m(temp, alpha, m, gamma)
+    return 2 * m - 2 * gamma * m * (1 - exp_2_2m) + gamma / exp_2 * \
+           (r_2m(m, exp_1, exp_1_2m, exp_1_2m_gamma, exp_2, exp_2_2m_pos, exp_2_2m_gamma) +
+            q_2m(m, exp_1, exp_1_2m_neg, exp_1_2m_gamma, sinh_1_2m, exp_2, exp_2_2m_pos, exp_2_2m_gamma, sinh_2_2m))
+
+
+
 def init_all_exp_2m_1(temp, alpha, m, gamma):
     exp_1 = np.exp(-(alpha - 1) * gamma / temp)
     exp_1_2m_1 = np.exp(2 * (alpha - 1) / temp / (2 * m + 1))
@@ -59,19 +82,6 @@ def init_all_exp_2m_1(temp, alpha, m, gamma):
            exp_2, exp_2_2m_1, exp_2_2m_1_pos, exp_2_2m_1_gamma, exp_2_2m_1_gamma_1, sinh_2_2m_1, sqrt_exp_2_2m_1_pos, sqrt_exp_2_2m_1_neg
 
 
-def r_2m(m, exp_1, exp_1_2m, exp_1_2m_gamma, exp_2, exp_2_2m_pos, exp_2_2m_gamma):
-    return 2* m * (1 - exp_1_2m) * exp_1 * a_2m(m, exp_1_2m_gamma) + \
-           2 * m * binom(2 * m, m) * (1 - exp_2_2m_pos) + \
-           2 * m * (1 - exp_2_2m_pos) * exp_2 * a_2m(m, exp_2_2m_gamma)
-
-
-def q_2m(m, exp_1, exp_1_2m_neg, exp_1_2m_gamma, sinh_1_2m, 
-            exp_2, exp_2_2m_pos, exp_2_2m_gamma, sinh_2_2m):
-    return 2 * sinh_1_2m * exp_1 * exp_1_2m_gamma * a_2m_der(m, exp_1_2m_gamma) + \
-           m * binom(2 * m, m) * (exp_2_2m_pos - exp_1_2m_neg) + \
-           4 * m * sinh_2_2m * exp_2 * a_2m(m, exp_2_2m_gamma) - \
-           2 * sinh_2_2m * exp_2 * exp_2_2m_gamma * a_2m_der(m, exp_2_2m_gamma)
-
 
 def r_2m_1(m, exp_1, exp_1_2m_1, exp_1_2m_1_gamma, exp_1_2m_1_gamma_1, sqrt_exp_1_2m_1_pos, 
               exp_2, exp_2_2m_1_pos, exp_2_2m_1_gamma, sqrt_exp_2_2m_1_pos):
@@ -89,20 +99,12 @@ def q_2m_1(m, exp_1, exp_1_2m_1_gamma, exp_1_2m_1_gamma_1, sinh_1_2m_1, sqrt_exp
            2 * sinh_2_2m_1 * exp_2 * exp_2_2m_1_gamma * a_2m_1_der(m, exp_2_2m_1_gamma)
 
 
-def func_2m(alpha, temp, m, gamma):
-    exp_1, exp_1_2m, exp_1_2m_neg, exp_1_2m_gamma, sinh_1_2m, \
-    exp_2, exp_2_2m, exp_2_2m_pos, exp_2_2m_gamma, sinh_2_2m = init_all_exp_2m(temp, alpha, m, gamma)
-    return 2 * m - 2 * gamma * m * (1 - exp_2_2m) + gamma / exp_2 * \
-           (r_2m(m, exp_1, exp_1_2m, exp_1_2m_gamma, exp_2, exp_2_2m_pos, exp_2_2m_gamma) -
-            q_2m(m, exp_1, exp_1_2m_neg, exp_1_2m_gamma, sinh_1_2m, exp_2, exp_2_2m_pos, exp_2_2m_gamma, sinh_2_2m))
-
-
 def func_2m_1(alpha, temp, m, gamma):
     exp_1, exp_1_2m_1, exp_1_2m_1_neg, exp_1_2m_1_gamma, exp_1_2m_1_gamma_1, sinh_1_2m_1, sqrt_exp_1_2m_1_pos, sqrt_exp_1_2m_1_neg, \
     exp_2, exp_2_2m_1, exp_2_2m_1_pos, exp_2_2m_1_gamma, exp_2_2m_1_gamma_1, sinh_2_2m_1, sqrt_exp_2_2m_1_pos, sqrt_exp_2_2m_1_neg = init_all_exp_2m_1(temp, alpha, m, gamma)
     return 2 * m + 1 - gamma * (2 * m + 1) * (1 - exp_2_2m_1) + gamma / exp_2 * \
            (r_2m_1(m, exp_1, exp_1_2m_1, exp_1_2m_1_gamma, exp_1_2m_1_gamma_1, sqrt_exp_1_2m_1_pos, 
-                      exp_2, exp_2_2m_1_pos, exp_2_2m_1_gamma, sqrt_exp_2_2m_1_pos) -
+                      exp_2, exp_2_2m_1_pos, exp_2_2m_1_gamma, sqrt_exp_2_2m_1_pos) +
             q_2m_1(m, exp_1, exp_1_2m_1_gamma, exp_1_2m_1_gamma_1, sinh_1_2m_1, sqrt_exp_1_2m_1_pos, sqrt_exp_1_2m_1_neg, 
                       exp_2, exp_2_2m_1_gamma, exp_2_2m_1_gamma_1, sinh_2_2m_1, sqrt_exp_2_2m_1_pos, sqrt_exp_2_2m_1_neg))
 
