@@ -31,21 +31,21 @@ def parse_file(filename, nsteps, dt, fileout):
 
 
 obs = "Mag_deord"
-n = 1000
-c = 5
-g = 5
-beta_list = ["2.0", "2.13", "2.5", "3.03", "3.85", "5.26", "8.33"]
+n = 10000
+c = 4
+g = 4
+beta_list = ["2.0", "2.13", "2.5", "3.03", "3.85", "5.26"]
 sims = 10
 nsteps = 100
 dt = 1000
 cond_init = 'ord'
 
-pathtofiles = '/media/david/Data/UH/Grupo_de_investigacion/Homophily/MC/Results/Transition/N_1000'
+pathtofiles = f'/media/david/Data/UH/Grupo_de_investigacion/Homophily/MC/Results/Transition/N_{n}'
 
 for beta in beta_list:
     filelist = glob(f'{pathtofiles}/Full_Random_Regular_{obs}_beta_{beta}_nodes_{n}_neigh_{c}_G_{g}_MCsteps_{nsteps * dt}_sims_{sims}_alpha_**_{cond_init}.dat')
     for filein in filelist:
         filename = filein.split("/")[-1]
         print(f'Reading file: "{filename}"')
-        fileout = pathtofiles + "/Parsed/G_5/" + filename[:-4] + "_parsed.txt"
+        fileout = pathtofiles + f'/Parsed/G_{g}/' + filename[:-4] + "_parsed.txt"
         parse_file(filein, nsteps, dt, fileout)
