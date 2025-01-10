@@ -97,12 +97,14 @@ def get_temp_list(temp_f, dtemp):
 
 def main():
     g = 5
-    c = 5
+    c = 4
     temp_f = 2
     dtemp = 0.01
 
-    mean_gamma = c - 1
-    graph_type = 'RGfc'
+    # mean_gamma = c - 1
+    # graph_type = 'RGfc'
+    mean_gamma = c
+    graph_type = 'ER'
     fileout = "Stability_Para_Homophily_" + graph_type + "_c_" + str(c) + "_G_" + str(g) + ".txt"
     temp_list = get_temp_list(temp_f, dtemp)
 
