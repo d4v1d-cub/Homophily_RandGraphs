@@ -22,7 +22,7 @@ def parse_file(filename, nsteps, dt, fileout):
         fout = open(fileout, "w")
         times = np.arange(0, nsteps * dt + dt / 2, dt)
         
-        for i in range(nsteps):
+        for i in range(nsteps + 1):
             error = np.sqrt(abs(av_sqr[i] - av[i] ** 2) / nsteps)
             fout.write(f'{times[i]}\t{av[i]}\t{error}\n')
         fout.close()
@@ -31,19 +31,20 @@ def parse_file(filename, nsteps, dt, fileout):
 
 
 obs = "Mag_deord"
+graph_type = "Erdos_Renyi"
 n = 10000
 c = 4
 g = 4
-beta_list = ["2.0", "2.13", "2.5", "3.03", "3.85", "5.26"]
-sims = 10
-nsteps = 100
-dt = 1000
-cond_init = 'ord'
+beta_list = ["1.75", "2.0", "2.13", "2.5", "3.03", "3.85", "5.26"]
+sims = 1
+nsteps = 10
+dt = 100
+cond_init = 'rand'
 
-pathtofiles = f'/media/david/Data/UH/Grupo_de_investigacion/Homophily/MC/Results/Transition/N_{n}'
+pathtofiles = f'/media/david/Data/UH/Grupo_de_investigacion/Homophily/MC/Results/{graph_type}/Transition/N_{n}'
 
 for beta in beta_list:
-    filelist = glob(f'{pathtofiles}/Full_Random_Regular_{obs}_beta_{beta}_nodes_{n}_neigh_{c}_G_{g}_MCsteps_{nsteps * dt}_sims_{sims}_alpha_**_{cond_init}.dat')
+    filelist = glob(f'{pathtofiles}/Full_{graph_type}_{obs}_beta_{beta}_nodes_{n}_neigh_{c}_G_{g}_MCsteps_{nsteps * dt}_sims_{sims}_alpha_**_{cond_init}.dat')
     for filein in filelist:
         filename = filein.split("/")[-1]
         print(f'Reading file: "{filename}"')
