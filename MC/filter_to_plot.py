@@ -33,13 +33,13 @@ def parse_file(filename, nsteps, dt, fileout):
 obs = "Mag_deord"
 graph_type = "Erdos_Renyi"
 n = 10000
-c = 4
-g = 4
-beta_list = ["1.75", "2.0", "2.13", "2.5", "3.03", "3.85", "5.26"]
+c = 3
+g = 3
+beta_list = ["1.56", "1.75", "2.0", "2.13", "2.5", "3.03", "3.85", "5.26"]
 sims = 1
 nsteps = 10
 dt = 100
-cond_init = 'rand'
+cond_init = 'ord'
 
 pathtofiles = f'/media/david/Data/UH/Grupo_de_investigacion/Homophily/MC/Results/{graph_type}/Transition/N_{n}'
 
