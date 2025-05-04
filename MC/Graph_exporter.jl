@@ -17,6 +17,8 @@ end
 
 function graph_export(graphid,n,k,seed)
     open("Graph_$(graphid)_N_$(n)_k_$(k)_seed_$(seed).txt", "w") do f
+        m = n * k ÷ 2
+        write(f, "$(n) $(m)\n")
         for e in edges(g)
             write(f, "$(src(e)) $(dst(e))\n")
         end

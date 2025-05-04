@@ -224,6 +224,7 @@ end
 function create_graph(n, graphname)
     g = Graph(n)
     open(graphname, "r") do f
+        readline(f) # Skip the first line
         for line in eachline(f)
             src, dst = split(line)
             add_edge!(g, parse(Int, src), parse(Int, dst))
