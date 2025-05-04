@@ -260,15 +260,16 @@ int main(int argc, char *argv[]) {
     long nsamples = atol(argv[10]);
     char *graph_str0 = argv[11];
     string string_init = argv[12];
+    char *string_init_for_filename = argv[12];
     char * graph_id = argv[13];
 
     char filemag[200];
     char fileener[200];
 
-    sprintf(filemag, "MC_%s_mag_alpha_%.3lf_g_%d_temp_%.3lf_tl_%li_tsampl_%li_sgraph0_%li_shist0_%li_nhist_%li.txt",
-            graph_id, alpha, g, temp, tlimit, save_every, seedgraph0, seedhist0, nsamples);
-    sprintf(fileener, "MC_%s_ener_alpha_%.3lf_g_%d_temp_%.3lf_tl_%li_tsampl_%li_sgraph0_%li_shist0_%li_nhist_%li.txt",
-            graph_id, alpha, g, temp, tlimit, save_every, seedgraph0, seedhist0, nsamples);
+    sprintf(filemag, "MC_%s_mag_alpha_%.3lf_g_%d_temp_%.3lf_tl_%li_tsampl_%li_sgraph0_%li_shist0_%li_nhist_%li_init_%s.txt",
+            graph_id, alpha, g, temp, tlimit, save_every, seedgraph0, seedhist0, nsamples, string_init_for_filename);
+    sprintf(fileener, "MC_%s_ener_alpha_%.3lf_g_%d_temp_%.3lf_tl_%li_tsampl_%li_sgraph0_%li_shist0_%li_nhist_%li_init_%s.txt",
+            graph_id, alpha, g, temp, tlimit, save_every, seedgraph0, seedhist0, nsamples, string_init_for_filename);
 
     MonteCarlo_All(alpha, g, temp, tlimit, save_every, print_every, seedgraph0, ngraphs, seedhist0, nsamples, graph_str0, string_init, filemag, fileener);    
     return 0;
