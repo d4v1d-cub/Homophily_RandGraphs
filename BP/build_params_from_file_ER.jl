@@ -59,3 +59,4 @@ dtemp = parse(Float64, ARGS[5])  # Temperature step
 temps_data, alphas_data, max_ndigits = read_pairs(fileinput)
 temps, alphas = interpolate_pairs(temps_data, alphas_data, temp0, tempf, dtemp)
 print_results(fileoutput, temps, alphas, max_ndigits)
+println("nlines=$(length(temps))")

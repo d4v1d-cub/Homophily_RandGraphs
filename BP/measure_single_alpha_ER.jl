@@ -6,18 +6,9 @@ cm = parse(Float64, ARGS[1])      # Graph connectivity
 delta = parse(Float64, ARGS[2])  # When the error is below this threshold, I declare that BP converges
 
 if tryparse(Float64, ARGS[3]) !== nothing
-    string_init="ord_p_" * ARGS[3]
     cond_init = parse(Float64, ARGS[3])
 else
     cond_init = ARGS[3]
-    if cond_init == "rand"
-        string_init = "_rand_init"
-    elseif cond_init == "ord"
-        string_init = "_init_ord"
-    else
-        println("The initial condition variable 'cond_init' must be 'ord', 'rand' or a floating point number")
-        exit(1)
-    end
 end
 
 G = parse(Int64, ARGS[4])      # Number of opinions

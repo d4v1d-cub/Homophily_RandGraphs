@@ -285,8 +285,10 @@ function run_BP_find_transition(cm::Float64, max_iter::Int64, delta::Float64, G:
         population_mess = set_population_rand(G,S)
     elseif cond_init == "ord"
         population_mess = set_population_ord(G,S)
-	else
+	elseif typeof(cond_init) == Float64
 	    population_mess = set_population_arbitrary(G, S, cond_init)
+    else
+        throw(ArgumentError("cond_init must be 'rand', 'ord' or a Float64 value"))
     end
     
     
