@@ -46,6 +46,28 @@
             ],
             "preLaunchTask": "C/C++: g++-11 MC homophily",
             "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "type": "julia",
+            "request": "launch",
+            "name": "find_transition_ER",
+            "program": "./BP/find_transition_ER.jl",
+            "stopOnEntry": false,
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "juliaEnv": "${command:activeJuliaEnvironment}",
+            "args": ["3", "1e-6", "0.51", "3", "10", "4", "4", "0.6", "0.7", "0.1", "1.0", "2", "1", "0.01", "BP/Results", "BP_testout.txt"]
+        },
+        {
+            "type": "julia",
+            "request": "launch",
+            "name": "measure_single_alpha_ER",
+            "program": "./BP/measure_single_alpha_ER.jl",
+            "stopOnEntry": false,
+            "cwd": "${workspaceFolder}",
+            "env": {},
+            "juliaEnv": "${command:activeJuliaEnvironment}",
+            "args": ["3", "1e-6", "0.51", "3", "10", "4", "4", "0.6", "1.0", "2", "1", "0.01", "BP/Results", "BP_testout.txt"]
         }
     ]
 }
