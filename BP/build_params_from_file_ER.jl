@@ -28,12 +28,13 @@ function read_pairs(fileinput::String)
 end
 
 
-function interpolate_pairs(temps_data::Array{Float64, 1}, alphas_data::Array{Float64, 1}, temp0::Float64, tempf::Float64, dtemp::Float64)
+function interpolate_pairs(temps_data::Array{Float64, 1}, alphas_data::Array{Float64, 1}, temp0::Float64, tempf::Float64, dtemp::Float64, 
+                           dalpha::Float64=0.02, alpha_min::Float64=0.5)
     temps = temp0:dtemp:tempf
     alphas = Float64[]
     interp_linear_extrap = linear_interpolation(temps_data, alphas_data, extrapolation_bc=Line());
     for temp in temps
-        push!(alphas, interp_linear_extrap(temp))
+        push!(alphas, max(interp_linear_extrap(temp) - dalpha, alpha_min))  # Ensure alpha does not go below alpha_min
     end
     return temps, alphas
 end
