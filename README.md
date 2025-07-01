@@ -26,11 +26,10 @@ This repository contains all code and data supporting the research paper:
 
 ⚠️ Important Warnings
 <details> <summary><strong>Click to expand warnings</strong></summary>
-Directory Structure
+Directory Structure |
 1. The scripts expect the exact directory structure:
    - /Article_plots (contains all data files)
-   - /MC, /BP, /Theory (code directories)
-
+   
 2. If you modify the structure, you must update the paths in:
    - main_paper_figs.py
    - supplementary_figs.py
