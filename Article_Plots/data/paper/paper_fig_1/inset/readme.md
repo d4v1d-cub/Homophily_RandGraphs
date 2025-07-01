@@ -1,0 +1,2 @@
+[BP_RGfc_allalpha_eq_c_5_delta_-10_maxiter_100000_hom_init_p_1.0_G_5_alphas_0.5_0.005_1.0_temps_0.05_0.01_1.2.txt](https://github.com/user-attachments/files/21005316/BP_RGfc_allalpha_eq_c_5_delta_-10_maxiter_100000_hom_init_p_1.0_G_5_alphas_0.5_0.005_1.0_temps_0.05_0.01_1.2.txt)
+[BP_RGfc_allalpha_eq_c_5_delta_-10_maxiter_100000_hom_init_p_0.51_G_5_alphas_0.5_0.005_1.0_temps_0.05_0.01_1.2.txt](https://github.com/user-attachments/files/21005314/BP_RGfc_allalpha_eq_c_5_delta_-10_maxiter_100000_hom_init_p_0.51_G_5_alphas_0.5_0.005_1.0_temps_0.05_0.01_1.2.txt)
