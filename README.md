@@ -1,4 +1,4 @@
-# Homophily and Random Graphs Analysis
+# Homophilic and xenophobic interactions in Random Graphs
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.18513-b31b1b.svg)](https://arxiv.org/abs/2506.18513)
 
