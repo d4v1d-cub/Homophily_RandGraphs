@@ -28,18 +28,17 @@ This repository contains all code and data supporting the research paper:
 
 ### 📋 Prerequisites
 - Used Python 3.12.4
+- Required packages (install with `pip install -r requirements.txt`)
 
-### 🚀 Step-by-Step Reproduction
-
-pip install -r requirements.txt
+### 🚀 Just run the following
 
 **Main paper + Fig. 4 Supp. Mat.** figures (will not create /paper_figs directory)
 
-python main_paper_figs.py
+`python main_paper_figs.py`
 
 **Supplementary figures** (will not create /sm_figs directory)
 
-python supplementary_figs.py
+`python supplementary_figs.py`
 
 ⚠️ **Important Warnings**
 <details> <summary><strong>Click to expand warnings</strong></summary>
