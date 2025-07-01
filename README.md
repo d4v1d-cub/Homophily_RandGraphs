@@ -18,7 +18,7 @@ This repository contains all code and data supporting the research paper:
 ### 📊 Plot Data & Visualization
 | Directory | Content Description |
 |-----------|---------------------|
-| [**/Article_plots**](./Article_plots) | All data files for:<br>- Main paper figures<br>- Supplementary materials figures |
+| [**/Article_Plots**](./Article_Plots) | All data files for:<br>- Main paper figures<br>- Supplementary materials figures |
 | `main_paper_figs.py` | Generates **main paper figures**<br>(Outputs to `/paper_figs`) |
 | `supplementary_figs.py` | Generates **supplementary figures**<br>(Outputs to `/sm_figs`) |
 
