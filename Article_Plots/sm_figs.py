@@ -8,6 +8,15 @@ plt.style.use(['science'])
 from matplotlib.ticker import MaxNLocator
 from matplotlib.ticker import FormatStrFormatter  
 
+import glob
+import re
+import matplotlib.cm as cm
+from matplotlib.ticker import LogLocator
+
+def extract_n_value(file_path):
+    match = re.search(r'N_(\d+)', file_path)
+    return int(match.group(1)) if match else 0
+
 
 def import_files(name,directory):
     dataframes = []
@@ -366,9 +375,90 @@ plt.tight_layout()
 plt.savefig('sm_figs/mag_vs_t_MC_526_rand.pdf',dpi=800)
 
 
-#DATA - FIG. 5
+minset_legend_fs=24
+minset_ylabel_fs=36
+minset_xlabel_fs=36
+minset_ticks_fs=34
 
-print('Saving fig. 5 ...\n')
+texts=24
+
+
+
+# DATA - FIG 4
+
+# Find all files matching the pattern
+file_path='data/sup_materials/fig_4/'
+
+
+file_paths = sorted(glob.glob(file_path+'MC_Erdos_Renyi_N_*_k_3_mag_alpha_0.840_g_3_temp_0.470_*.txt'))
+
+
+file_paths_sorted = sorted(file_paths, key=extract_n_value)
+
+
+
+# FIG 4
+print('Saving fig. 4 ...\n')
+
+plt.figure(figsize=(12, 8))
+
+# Generate a colormap from light to dark red
+colors = cm.Reds(np.linspace(0.4, 1, len(file_paths_sorted)))
+
+for i, file_path in enumerate(file_paths_sorted):
+    # Extract N value from filename for legend
+    n_value = re.search(r'N_(\d+)', file_path).group(1)
+    
+    # Load data with np.loadtxt, skipping first row
+    data = np.loadtxt(file_path, skiprows=1)
+    
+    # Separate the data into two arrays
+    xg1r = data[:, 0]  # First column
+    yg1r = data[:, 1]  # Second column
+    
+    # Plot squares without lines, color from light to dark red
+    plt.scatter(xg1r, yg1r, label=f'N = {n_value}', marker='s', s=60, facecolors='none', edgecolors=colors[i])
+
+plt.axhline(y=0.5134176186727494, color='b', linestyle='--',linewidth=3, label='BP')
+
+plt.xscale('log')  # set x-axis to logarithmic scale
+plt.ylim(0,0.6)
+
+plt.gca().yaxis.set_major_locator(MaxNLocator(5))
+
+
+# Add labels and title
+plt.xlabel('t', fontsize=minset_xlabel_fs)
+plt.ylabel('m', fontsize=minset_ylabel_fs)
+
+# Increase tick size
+plt.xticks(fontsize=minset_ticks_fs)
+plt.yticks(fontsize=minset_ticks_fs)
+
+plt.text(25, 0.56, 'T = 0.47', rotation=0, fontsize=texts, color='black')
+plt.text(25, 0.52, r'$\alpha$ = 0.84', rotation=0, fontsize=texts, color='black')
+
+# Add legend with LaTeX formatting
+plt.legend(fontsize=minset_legend_fs, loc='center left')
+
+# Adjust layout to prevent label cutoff
+plt.tight_layout()
+
+plt.savefig('sm_figs/mag_vs_t_MC_BP_N_rand.pdf',dpi=800)
+
+
+
+minset_legend_fs=34
+minset_ylabel_fs=36
+minset_xlabel_fs=36
+minset_ticks_fs=34
+
+texts=30
+
+
+#DATA - FIG. 6
+
+print('Saving fig. 6 ...\n')
 
 file_path='data/paper/paper_fig_3/inset/'
 file = file_path+'BP_ER_popdyn_eq_c_3_T_0.200_delta_1e-6_maxiter_1000_init_p_0.51_G_3_deltamag_0.01_popsize_100000_smoothsize_100_measuresize_1000_seed_1.txt'
@@ -411,7 +501,7 @@ plt.tight_layout()
 
 plt.savefig('sm_figs/er_free_energy_T_0.2' + '.pdf', dpi=800)
 
-file_path='data/sup_materials/fig_5/'
+file_path='data/sup_materials/fig_6/'
 file = file_path+'BP_ER_popdyn_eq_c_3_T_0.500_delta_1e-6_maxiter_1000_init_p_0.51_G_3_deltamag_0.01_popsize_100000_smoothsize_100_measuresize_1000_seed_1.txt'
 
 
@@ -490,7 +580,7 @@ plt.text(0.6, -2.3, 'T = 0.35', rotation=0, fontsize=texts, color='black')
 
 plt.savefig('sm_figs/free_energy_T_0.35' + '.pdf', dpi=800)
 
-file_path='data/sup_materials/fig_5/'
+file_path='data/sup_materials/fig_6/'
 
 file = file_path+'BP_RGfc_allalpha_eq_c_5_delta_-10_maxiter_100000_hom_init_p_0.51_G_5_alphas_0.5_0.005_1.0_temps_0.15_0.01_0.15.txt'
 
